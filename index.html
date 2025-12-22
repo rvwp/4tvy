@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4rvyWeb | Interactive Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #050505;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(0, 255, 242, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 255, 242, 0.1);
+        }
+
+        .title-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 255, 242, 0.5), 0 0 20px rgba(0, 255, 242, 0.3);
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00fff2;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ccc2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3D Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Main Content Overlay -->
+    <main class="relative min-h-screen flex flex-col justify-between z-10">
+        
+        <!-- Header / Hero -->
+        <header class="container mx-auto px-6 py-20 min-h-[90vh] flex flex-col justify-center items-start relative">
+            <div class="glass-panel p-2 rounded-lg inline-block mb-4">
+                <span class="text-cyan-400 font-bold tracking-widest px-3 py-1 text-sm uppercase">Main Website</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl font-black title-font mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 neon-text">
+                4RVY<br>WEB
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8 leading-relaxed">
+                The ArZiKa Universe
+Immersive games. Useful tools. Built for the future.
+            </p>
+
+            <a href="#projects" class="group relative px-8 py-3 bg-transparent overflow-hidden rounded-md border border-cyan-500 text-cyan-400 font-bold transition-all hover:text-black">
+                <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-cyan-500 rounded-full group-hover:w-80 group-hover:h-80 -ml-20 -mt-20"></span>
+                <span class="relative flex items-center gap-2">
+                    Explore Projects <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </a>
+
+            <!-- Scroll Indicator -->
+            <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center scroll-indicator transition-opacity duration-500">
+                <p class="text-xs tracking-[0.3em] text-cyan-400 mb-2 uppercase">Scroll Down</p>
+                <i class="fas fa-chevron-down text-white text-xl"></i>
+            </div>
+        </header>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container mx-auto px-6 py-20">
+            <h2 class="text-4xl md:text-5xl font-bold title-font mb-16 text-center">
+                <span class="border-b-4 border-cyan-500 pb-2">PROJECTS</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <a href="https://rvwp.github.io/typing-speed-game/" target="_blank" class="glass-panel p-8 rounded-2xl block group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold mb-3 title-font group-hover:text-cyan-300 transition-colors">Typing Speed Game</h3>
+                    <p class="text-gray-400 text-sm mb-6">Test your reflexes and accuracy in this fast-paced typing challenge.</p>
+                    <div class="flex items-center text-cyan-400 text-sm font-bold tracking-wider uppercase">
+                        Play Now <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://rvwp.github.io/Arvy-Vibes---Brick-Breaker/" target="_blank" class="glass-panel p-8 rounded-2xl block group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold mb-3 title-font group-hover:text-purple-300 transition-colors">Brick Breaker</h3>
+                    <p class="text-gray-400 text-sm mb-6">Arvy Vibes edition of the classic arcade breakout style game.</p>
+                    <div class="flex items-center text-purple-400 text-sm font-bold tracking-wider uppercase">
+                        Play Now <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://rvwp.github.io/Timer-App/" target="_blank" class="glass-panel p-8 rounded-2xl block group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold mb-3 title-font group-hover:text-pink-300 transition-colors">Timer App</h3>
+                    <p class="text-gray-400 text-sm mb-6">A sleek, functional timer utility for productivity and management.</p>
+                    <div class="flex items-center text-pink-400 text-sm font-bold tracking-wider uppercase">
+                        Open Tool <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="https://rvwp.github.io/ArZiKa-Universe/" target="_blank" class="glass-panel p-8 rounded-2xl block group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold mb-3 title-font group-hover:text-blue-300 transition-colors">ArZiKa Universe</h3>
+                    <p class="text-gray-400 text-sm mb-6">Explore the expansive digital universe of ArZiKa.</p>
+                    <div class="flex items-center text-blue-400 text-sm font-bold tracking-wider uppercase">
+                        Enter Universe <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                    </div>
+                </a>
+
+                <!-- Project 5 -->
+                <a href="https://rvwp.github.io/arvy-vibes-name-directory/" target="_blank" class="glass-panel p-8 rounded-2xl block group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold mb-3 title-font group-hover:text-green-300 transition-colors">Name Directory</h3>
+                    <p class="text-gray-400 text-sm mb-6">A comprehensive directory service for Arvy Vibes.</p>
+                    <div class="flex items-center text-green-400 text-sm font-bold tracking-wider uppercase">
+                        View Directory <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="glass-panel mt-20 py-8 border-t border-gray-800">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row justify-center items-center text-sm text-gray-500">
+                <div class="mb-4 md:mb-0">
+                    &copy; 2024 4rvyWeb. All rights reserved.
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- 3D ANIMATION LOGIC ---
+        window.onload = function() {
+            const container = document.getElementById('canvas-container');
+
+            // Scene Setup
+            const scene = new THREE.Scene();
+            
+            // Fog for depth
+            scene.fog = new THREE.FogExp2(0x050505, 0.002);
+
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 30;
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Objects
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 2000;
+            const posArray = new Float32Array(particlesCount * 3);
+            const scaleArray = new Float32Array(particlesCount);
+
+            for(let i = 0; i < particlesCount * 3; i+=3) {
+                // Sphere shape distribution
+                const r = 40 * Math.cbrt(Math.random());
+                const theta = Math.random() * 2 * Math.PI;
+                const phi = Math.acos(2 * Math.random() - 1);
+
+                posArray[i] = r * Math.sin(phi) * Math.cos(theta);     // x
+                posArray[i+1] = r * Math.sin(phi) * Math.sin(theta);   // y
+                posArray[i+2] = r * Math.cos(phi);                     // z
+
+                scaleArray[i/3] = Math.random();
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particlesGeometry.setAttribute('aScale', new THREE.BufferAttribute(scaleArray, 1));
+
+            // Custom Shader Material for glowy dots
+            // Since we can't easily load external textures, we use a simple circular point material or standard PointsMaterial
+            const material = new THREE.PointsMaterial({
+                size: 0.15,
+                color: 0x00fff2,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+
+            // Secondary Particles (Purple)
+            const particlesGeometry2 = new THREE.BufferGeometry();
+            const particlesCount2 = 1000;
+            const posArray2 = new Float32Array(particlesCount2 * 3);
+            
+            for(let i = 0; i < particlesCount2 * 3; i++) {
+                posArray2[i] = (Math.random() - 0.5) * 100;
+            }
+            particlesGeometry2.setAttribute('position', new THREE.BufferAttribute(posArray2, 3));
+            
+            const material2 = new THREE.PointsMaterial({
+                size: 0.2,
+                color: 0x9d4edd,
+                transparent: true,
+                opacity: 0.6,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            const particlesMesh2 = new THREE.Points(particlesGeometry2, material2);
+            
+            scene.add(particlesMesh);
+            scene.add(particlesMesh2);
+
+            // Add geometric shape in center
+            const geoGeometry = new THREE.IcosahedronGeometry(10, 1);
+            const geoMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0x00fff2, 
+                wireframe: true, 
+                transparent: true, 
+                opacity: 0.05 
+            });
+            const geoMesh = new THREE.Mesh(geoGeometry, geoMaterial);
+            scene.add(geoMesh);
+
+
+            // Mouse Interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - windowHalfX);
+                mouseY = (event.clientY - windowHalfY);
+            });
+
+            // Touch interaction for mobile
+            document.addEventListener('touchmove', (event) => {
+                if(event.touches.length > 0) {
+                    mouseX = (event.touches[0].clientX - windowHalfX);
+                    mouseY = (event.touches[0].clientY - windowHalfY);
+                }
+            });
+
+            // Animation Loop
+            const clock = new THREE.Clock();
+
+            const tick = () => {
+                const elapsedTime = clock.getElapsedTime();
+
+                targetX = mouseX * 0.001;
+                targetY = mouseY * 0.001;
+
+                // Smooth rotation based on mouse
+                particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
+                particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
+                
+                particlesMesh2.rotation.y += 0.02 * (targetX - particlesMesh2.rotation.y);
+                particlesMesh2.rotation.x += 0.02 * (targetY - particlesMesh2.rotation.x);
+
+                // Constant ambient rotation
+                particlesMesh.rotation.z = elapsedTime * 0.05;
+                particlesMesh2.rotation.z = -elapsedTime * 0.02;
+
+                // Pulse effect for central geometry
+                geoMesh.rotation.x += 0.005;
+                geoMesh.rotation.y += 0.005;
+                const scale = 1 + Math.sin(elapsedTime) * 0.1;
+                geoMesh.scale.set(scale, scale, scale);
+
+                // Update particle positions for wave effect (optional, keeps it alive)
+                // Access positions if we want to animate individual vertices, 
+                // but rotating the whole group is more performant for this number of particles.
+
+                renderer.render(scene, camera);
+                window.requestAnimationFrame(tick);
+            }
+
+            tick();
+
+            // Resize handling
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // Fade Scroll Indicator
+            window.addEventListener('scroll', () => {
+                const indicator = document.getElementById('scroll-indicator');
+                if (indicator) {
+                    indicator.style.opacity = window.scrollY > 50 ? '0' : '1';
+                }
+            });
+        };
+    </script>
+</body>
+</html>

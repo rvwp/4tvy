@@ -93,7 +93,7 @@
         <!-- Header / Hero -->
         <header class="container mx-auto px-6 py-20 min-h-[90vh] flex flex-col justify-center items-start relative">
             <div class="glass-panel p-2 rounded-lg inline-block mb-4">
-                <span class="text-cyan-400 font-bold tracking-widest px-3 py-1 text-sm uppercase">Main Website</span>
+                <span class="text-cyan-400 font-bold tracking-widest px-3 py-1 text-sm uppercase">Portfolio v3.1</span>
             </div>
             
             <h1 class="text-6xl md:text-8xl font-black title-font mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 neon-text">
@@ -101,8 +101,7 @@
             </h1>
             
             <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8 leading-relaxed">
-                The ArZiKa Universe
-Immersive games. Useful tools. Built for the future.
+                Welcome to the digital nexus. Explore the ArZiKa Universe, immersive games, and utilities. Built for the future.
             </p>
 
             <a href="#projects" class="group relative px-8 py-3 bg-transparent overflow-hidden rounded-md border border-cyan-500 text-cyan-400 font-bold transition-all hover:text-black">
@@ -127,6 +126,15 @@ Immersive games. Useful tools. Built for the future.
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
+                <!-- NEW PROJECT: Solar System -->
+                <a href="https://rvwp.github.io/3D-Solar-System-Simulator/" target="_blank" class="glass-panel p-8 rounded-2xl block group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold mb-3 title-font group-hover:text-yellow-300 transition-colors">3D Solar System</h3>
+                    <p class="text-gray-400 text-sm mb-6">Interactive 3D simulation of our solar system with planetary orbits.</p>
+                    <div class="flex items-center text-yellow-400 text-sm font-bold tracking-wider uppercase">
+                        Explore Space <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                    </div>
+                </a>
+
                 <!-- Project 1 -->
                 <a href="https://rvwp.github.io/typing-speed-game/" target="_blank" class="glass-panel p-8 rounded-2xl block group relative overflow-hidden">
                     <h3 class="text-2xl font-bold mb-3 title-font group-hover:text-cyan-300 transition-colors">Typing Speed Game</h3>
@@ -230,7 +238,6 @@ Immersive games. Useful tools. Built for the future.
             particlesGeometry.setAttribute('aScale', new THREE.BufferAttribute(scaleArray, 1));
 
             // Custom Shader Material for glowy dots
-            // Since we can't easily load external textures, we use a simple circular point material or standard PointsMaterial
             const material = new THREE.PointsMaterial({
                 size: 0.15,
                 color: 0x00fff2,
@@ -322,10 +329,6 @@ Immersive games. Useful tools. Built for the future.
                 geoMesh.rotation.y += 0.005;
                 const scale = 1 + Math.sin(elapsedTime) * 0.1;
                 geoMesh.scale.set(scale, scale, scale);
-
-                // Update particle positions for wave effect (optional, keeps it alive)
-                // Access positions if we want to animate individual vertices, 
-                // but rotating the whole group is more performant for this number of particles.
 
                 renderer.render(scene, camera);
                 window.requestAnimationFrame(tick);
